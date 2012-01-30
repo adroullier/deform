@@ -84,12 +84,6 @@ class TestFileData(unittest.TestCase):
         result = typ.serialize(node, null)
         self.assertEqual(result, null)
 
-    def test_serialize_not_a_dict(self):
-        typ = self._makeOne()
-        node = DummySchemaNode()
-        e = invalid_exc(typ.serialize, node, None)
-        self.assertEqual(e.msg, '${value} is not a dictionary')
-
     def test_serialize_no_filename(self):
         typ = self._makeOne()
         node = DummySchemaNode()

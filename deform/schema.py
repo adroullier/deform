@@ -90,7 +90,7 @@ class FileData(object):
         ``mimetype`` is not provided, the widget will not be able to
         display mimetype information.
         """
-        if value is colander.null:
+        if value in (colander.null, None, ""):
             return colander.null
         
         if not hasattr(value, 'get'):
@@ -138,7 +138,7 @@ class Set(object):
         return value
 
     def deserialize(self, node, value):
-        if value is colander.null:
+        if value in (colander.null, None, ""):
             return colander.null
         if not hasattr(value, '__iter__'):
             raise colander.Invalid(
@@ -150,5 +150,3 @@ class Set(object):
             raise colander.Invalid(node, _('Required'))
         return value
     
-        
-
