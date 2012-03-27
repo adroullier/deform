@@ -1373,6 +1373,48 @@ class TextInputCSVWidget(Widget):
                 msgs.append('%s' % e)
             field.error = Invalid(field.schema, '\n'.join(msgs))
 
+class CodeTextWidget(TextInputWidget):
+    """
+    Renders a ``<textarea>`` widget with the
+    :term:`Codemirror Editor`.
+
+    **Attributes/Arguments**
+
+    height
+        The height, in pixels, of the text editor.  Defaults to 240.
+
+    readonly_template
+        The template name used to render the widget in read-only mode.
+        Default: ``readonly/richtext``.
+
+    template
+        The template name used to render the widget.  Default:
+        ``codetext``.
+
+    codetype 
+        The skin for the WYSIWYG editor. Normally only needed if you
+        plan to reuse a TinyMCE js from another framework that
+        defined a skin.
+
+    theme
+        The theme for the WYSIWYG editor, ``simple`` or ``advanced``.
+        Defaults to ``simple``.
+
+    width
+        The width, in pixels, of the editor.  Defaults to 500.
+        The width can also be given as a percentage (e.g. '100%')
+        relative to the width of the enclosing element.
+    """
+    height = 400
+    width = 500
+    readonly_template = 'readonly/codetext'
+    template = 'codetext'
+    codetype = 'default'
+    theme = 'simple'
+    requirements = ( ('codemirror', None), )
+
+
+
 class ResourceRegistry(object):
     """ A resource registry maps :term:`widget requirement` name/version
     pairs to one or more relative resources.  A resource registry can
@@ -1485,6 +1527,12 @@ default_resources = {
     'tinymce': {
         None:{
             'js':'tinymce/jscripts/tiny_mce/tiny_mce.js',
+            },
+        },
+    'codemirror': {
+        None:{
+            'js':'codemirror/lib/codemirror.js',
+            'css':'codemirror/lib/codemirror.css',
             },
         },
     }
